@@ -16,5 +16,11 @@ class GameStatus
 		
 	}
 	
+	public static function UpdateLayout():Void
+	{
+		
+		
+	}
+	
 	
 }

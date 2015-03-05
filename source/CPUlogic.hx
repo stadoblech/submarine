@@ -6,6 +6,8 @@ package ;
  */
 class CPUlogic
 {
+	
+	//var numberOfHits:Int = 0;
 
 	public function new() 
 	{
@@ -17,4 +19,10 @@ class CPUlogic
 		return true;
 		
 	}
+	/*
+	public function ReturnHitPlayer():Int
+	{
+		return numberOfHits;
+	}*/
+
 }
