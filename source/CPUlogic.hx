@@ -1,4 +1,5 @@
 package ;
+import flixel.util.FlxRandom;
 
 /**
  * ...
@@ -6,9 +7,9 @@ package ;
  */
 class CPUlogic
 {
+	var activeEvent:Event;
+	var haveActiveEvent:Bool = false;
 	
-	//var numberOfHits:Int = 0;
-
 	public function new() 
 	{
 		
@@ -16,13 +17,29 @@ class CPUlogic
 	
 	public function Update():Bool
 	{
-		return true;
+		if (!haveActiveEvent)
+		{
+			activeEvent = pickEvent();
+			haveActiveEvent = true;
+		}
 		
+		if (activeEvent.isEventEnding())
+		{
+			haveActiveEvent = false;
+		}
+		
+		return true;		
 	}
-	/*
-	public function ReturnHitPlayer():Int
+	
+	private function pickEvent():Event
 	{
-		return numberOfHits;
-	}*/
-
+		var rand = FlxRandom.intRanged(0, 4);
+		
+		if (rand == 0)
+		{
+			return new Battle();
+		}
+		
+		return null;
+	}
 }

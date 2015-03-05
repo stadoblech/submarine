@@ -24,7 +24,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		turn = Turn.PLAYER;
+		turn = Turn.CPU;
 		player = new PlayerLogic();
 		cpu = new CPUlogic();
 	}

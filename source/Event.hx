@@ -6,13 +6,15 @@ package;
  */
 class Event
 {
-
-	var EventText:String;
-
 	
 	public function new() 
 	{
 		
+	}
+	
+	public function isEventEnding():Bool
+	{
+		return false;
 	}
 	
 	
