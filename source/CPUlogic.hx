@@ -7,8 +7,14 @@ package ;
 class CPUlogic
 {
 
-	public static function handleTurn():Void
+	public function new() 
 	{
+		
+	}
+	
+	public function Update():Bool
+	{
+		return true;
 		
 	}
 }

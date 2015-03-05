@@ -18,11 +18,15 @@ class PlayState extends FlxState
 {
 	
 	var turn:Turn;
+	var player:PlayerLogic;
+	var cpu:CPUlogic;
 	
 	override public function create():Void
 	{
 		super.create();
 		turn = Turn.PLAYER;
+		player = new PlayerLogic();
+		cpu = new CPUlogic();
 	}
 	
 	override public function destroy():Void
@@ -34,14 +38,23 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
+		
+		
 		switch(turn)
 		{
 			case Turn.PLAYER:
 				{
-					
+					if (!player.Update())
+					{
+						turn = Turn.CPU;
+					}
 				}
 			case Turn.CPU:
 				{
+					if (!cpu.Update())
+					{
+						turn = Turn.PLAYER;
+					}
 					
 				}
 		}

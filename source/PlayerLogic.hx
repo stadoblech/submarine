@@ -12,4 +12,10 @@ class PlayerLogic
 		
 	}
 	
+	public function Update():Bool
+	{
+		return true;
+		
+	}
+	
 }
