@@ -40,7 +40,7 @@ class PlainWatter extends Event
 	override public function SetConditions():Void
 	{
 		//Tento event nemá žádné podmínky.
-		GameStatus.Label = "Just plain ocean. Dark, silence and impossible pressure."
+		GameStatus.Label = "Just plain ocean. Dark, silence and impossible pressure.";
 		super.SetConditions();
 	}
 	

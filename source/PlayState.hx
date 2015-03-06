@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import gameboard.Board;
 
 
 enum Turn
@@ -21,12 +22,18 @@ class PlayState extends FlxState
 	var player:PlayerLogic;
 	var cpu:CPUlogic;
 	
+	var board:Board;
+	
 	override public function create():Void
 	{
 		super.create();
 		turn = Turn.CPU;
 		player = new PlayerLogic();
 		cpu = new CPUlogic();
+		
+		board = new Board();
+		add(board);
+		
 	}
 	
 	override public function destroy():Void
@@ -58,8 +65,6 @@ class PlayState extends FlxState
 					}
 					
 				}
-		}
-		
-		
+		}		
 	}	
 }
