@@ -1,12 +1,12 @@
-package;
-import flixel.util.FlxRandom;
+package events ;
 
 /**
  * ...
- * @author Qerts
+ * @author w
  */
-class Event
+class Battle extends Event
 {
+	
 	//Základní vlastnosti eventu
 	private var followingEvent:Event;		//případný následující event
 	private var continues:Bool = false;		//jestli event pokračuje dalším eventem nebo ne
@@ -17,47 +17,47 @@ class Event
 	
 	public function new() 
 	{
-		
+		super();
 	}
 	
 	//Vrátí, zda event končí nebo ne.
-	public function isEventEnding():Bool
+	override public function isEventEnding():Bool
 	{
 		return ending;
 	}
 	
 	//Řekne eventu, že by měl skončit a hráč právě hrál své kolo.
-	public function EndEvent()
+	override public function EndEvent()
 	{
 		ending = true;
 	}
 	
 	//Vrátí, zda má event nějakého následovníka nebo ne.
-	public function DoesContinue():Bool
+	override public function DoesContinue():Bool
 	{
 		return continues;
 	}
 	
 	//Vrátí následovníka funkce.
-	public function GetFollowingEvent():Event
+	override public function GetFollowingEvent():Event
 	{
 		return null;
 	}
 	
 	//Nastaví počáteční podmínky pro hráče + smaže obrazovku + vypíše na obrazovku nějaký status.
-	public function SetConditions():Void
+	override public function SetConditions():Void
 	{
 		
 	}
 	
 	//Zruší počáteční podmínky pro hráče + smaže status.
-	public function UnsetConditions():Void
+	override public function UnsetConditions():Void
 	{
 		
 	}
 	
 	//Zareaguje na proměnné vytvářené uživatelem v GameStatus a v závislosti na nich dá uživateli co proto + vypíše výslednou hlášku.
-	public function MakePlayerPay():Void
+	override public function MakePlayerPay():Void
 	{
 		
 	}

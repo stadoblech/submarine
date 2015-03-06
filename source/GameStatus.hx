@@ -6,13 +6,25 @@ package;
  */
 class GameStatus
 {
-	public static var health:Int;
-	public static var energy:Int;
+	//Staty hráče
+	public static var Health:Int;
+	public static var Energy:Int;
+	public static var Label:String;
+	public static var Terror:Int;
+	public static var Oxygen:Int; //v hodinách
+	
+	//Staty způsobené hráčem
+	public static var Damage:Int;
+	public static var Move:Maneuvre;
 	
 	public static function RestartProperties():Void
 	{
-		health = 100;
-		energy = 100;
+		Health = 100;
+		Energy = 100;
+		Label = "Welcome subexplorer. Find the way to salvation.... or die here, in waste depths of the Titan's Ocean.";
+		Terror = 0;
+		Oxygen = 240; //na deset dní
+		
 		
 	}
 	
@@ -21,6 +33,12 @@ class GameStatus
 		
 		
 	}
+	
+	
+}
+
+enum Maneuvre
+{
 	
 	
 }
