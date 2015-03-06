@@ -1,25 +1,17 @@
-package events ;
+package events;
 
 /**
  * ...
- * @author w
+ * @author Qerts
  */
-class Battle extends Event
+class Shallows
 {
-	
-	//Základní vlastnosti eventu
-	private var followingEvent:Event;		//případný následující event
-	private var continues:Bool = false;		//jestli event pokračuje dalším eventem nebo ne
-	private var ending:Bool = false;		//jestli event končí nebo ne
-	
-	private var startingLabel:String;
-	private var endingLabel:String;
-	
+
 	public function new() 
 	{
 		super();
 	}
-	
+		
 	//Vrátí, zda event končí nebo ne.
 	override public function isEventEnding():Bool
 	{
@@ -47,19 +39,32 @@ class Battle extends Event
 	//Nastaví počáteční podmínky pro hráče + smaže obrazovku + vypíše na obrazovku nějaký status.
 	override public function SetConditions():Void
 	{
+		//Tento event nemá žádné podmínky.
+		GameStatus.Label = startingLabel;
 		super.SetConditions();
 	}
 	
 	//Zruší počáteční podmínky pro hráče + smaže status.
 	override public function UnsetConditions():Void
 	{
-		
+		//Tento event nemá žádné podmínky.			
 	}
 	
 	//Zareaguje na proměnné vytvářené uživatelem v GameStatus a v závislosti na nich dá uživateli co proto + vypíše výslednou hlášku.
 	override public function MakePlayerPay():Void
 	{
+		GameStatus.Label = endingLabel;			
+		var rand = FlxRandom.intRanged(0, 1);
 		
+		switch (rand) 
+		{
+			case 0:
+				GameStatus.Terror += 1;
+			case 1:
+				GameStatus.Terror -= 1;					
+			default:			
+				
+		}
 	}
 	
 }

@@ -18,7 +18,7 @@ class CPUlogic
 	}
 	
 	//Pokud nemá logika aktivní event, tak nějaký vybere. Nastaví podmínky eventu a nastaví si aktivní událost jako true.
-	//Pokud má logika aktivní event a event končí, tak vynuluje podmínky a reaguje na vstupy uživatele. Poté se "ukončí", ale nenuluje se,
+	//Pokud má logika aktivní event a event končí, tak vynuluje podmínky a reaguje na vstupy uživatele. Event se nenuluje,
 	//aby bylo možné případně na event navazovat.
 	public function Update():Bool
 	{
@@ -26,7 +26,6 @@ class CPUlogic
 		{
 			activeEvent = pickEvent();
 			activeEvent.SetConditions();
-			activeEvent.EndEvent();
 			haveActiveEvent = true;
 		}else
 		{		
@@ -65,5 +64,10 @@ class CPUlogic
 		}
 		
 		return null;
+	}
+	
+	public function SetEnding():Void
+	{
+		activeEvent.EndEvent();
 	}
 }

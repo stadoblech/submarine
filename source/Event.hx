@@ -47,6 +47,7 @@ class Event
 	//Nastaví počáteční podmínky pro hráče + smaže obrazovku + vypíše na obrazovku nějaký status.
 	public function SetConditions():Void
 	{
+		ending = true;
 		
 	}
 	

@@ -15,7 +15,7 @@ class GameStatus
 	
 	//Staty způsobené hráčem
 	public static var Damage:Int;
-	public static var Move:Maneuvre;
+	public static var Move:Maneuvre; //předělat na pole pohybů!!!
 	
 	public static function RestartProperties():Void
 	{
@@ -39,6 +39,12 @@ class GameStatus
 
 enum Maneuvre
 {
-	
+	Up;
+	Down;
+	Left;
+	Right;
+	Forward;
+	Backward;
+	Stop;
 	
 }

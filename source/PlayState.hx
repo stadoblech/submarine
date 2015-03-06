@@ -47,6 +47,7 @@ class PlayState extends FlxState
 					if (!player.Update())
 					{
 						turn = Turn.CPU;
+						cpu.SetEnding();	//nastavení příznaku končení eventu
 					}
 				}
 			case Turn.CPU:

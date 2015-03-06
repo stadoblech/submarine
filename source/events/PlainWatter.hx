@@ -40,7 +40,8 @@ class PlainWatter extends Event
 	override public function SetConditions():Void
 	{
 		//Tento event nemá žádné podmínky.
-		GameStatus.Label = startingLabel;
+		GameStatus.Label = "Just plain ocean. Dark, silence and impossible pressure."
+		super.SetConditions();
 	}
 	
 	//Zruší počáteční podmínky pro hráče + smaže status.
@@ -52,14 +53,16 @@ class PlainWatter extends Event
 	//Zareaguje na proměnné vytvářené uživatelem v GameStatus a v závislosti na nich dá uživateli co proto + vypíše výslednou hlášku.
 	override public function MakePlayerPay():Void
 	{
-		GameStatus.Label = endingLabel;			
+			
 		var rand = FlxRandom.intRanged(0, 1);
 		
 		switch (rand) 
 		{
 			case 0:
+				GameStatus.Label = "This emptyness is kinda creepy. Gods, what can be out there?";
 				GameStatus.Terror += 1;
 			case 1:
+				GameStatus.Label = "You don't see anything. Maybe it's good sign";
 				GameStatus.Terror -= 1;					
 			default:			
 				
