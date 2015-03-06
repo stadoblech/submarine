@@ -4,7 +4,7 @@ package events;
  * ...
  * @author Qerts
  */
-class Shallows
+class Shallows extends Event
 {
 
 	public function new() 
@@ -40,8 +40,8 @@ class Shallows
 	override public function SetConditions():Void
 	{
 		//Tento event nemá žádné podmínky.
-		GameStatus.Label = startingLabel;
-		super.SetConditions();
+		GameStatus.Label = "Crackling. Scratching. It seems you are in shallow waters. You should stop scraping submarine belly of the seabed. Quickly, captain."
+		
 	}
 	
 	//Zruší počáteční podmínky pro hráče + smaže status.
@@ -53,18 +53,8 @@ class Shallows
 	//Zareaguje na proměnné vytvářené uživatelem v GameStatus a v závislosti na nich dá uživateli co proto + vypíše výslednou hlášku.
 	override public function MakePlayerPay():Void
 	{
-		GameStatus.Label = endingLabel;			
-		var rand = FlxRandom.intRanged(0, 1);
 		
-		switch (rand) 
-		{
-			case 0:
-				GameStatus.Terror += 1;
-			case 1:
-				GameStatus.Terror -= 1;					
-			default:			
-				
-		}
+		
 	}
 	
 }
