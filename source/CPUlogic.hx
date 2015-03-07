@@ -30,6 +30,7 @@ class CPUlogic
 			activeEvent = pickEvent();
 			GameStatus.RestartPlayerStats();
 			activeEvent.SetConditions();
+			Board.UpdateLabel();
 			haveActiveEvent = true;
 			return false;
 		}else
@@ -39,6 +40,7 @@ class CPUlogic
 				Lib.println("@>>>> Second Event Part Launched");
 				activeEvent.UnsetConditions();
 				activeEvent.MakePlayerPay();
+				Board.UpdateLabel();
 				haveActiveEvent = false;
 				return false;
 			}

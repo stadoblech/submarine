@@ -13,7 +13,7 @@ class Board extends FlxSpriteGroup
 	var attackButton:FlxButton;
 	var moveButton:FlxButton;
 	var proceedButton:FlxButton;
-	var labelBox:FlxTextField;
+	static var labelBox:FlxTextField;
 	
 	
 	public function new() 
@@ -54,8 +54,14 @@ class Board extends FlxSpriteGroup
 		labelBox.text = GameStatus.Label;
 	}
 	
-	override public function update():Void 
+	private function updateLabel():Void 
 	{
 		labelBox.text = GameStatus.Label;
 	}
+	
+	public static function UpdateLabel():Void
+	{
+		labelBox.text = GameStatus.Label;
+	}
+	
 }

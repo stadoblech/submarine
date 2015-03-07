@@ -55,7 +55,7 @@ class PlayState extends FlxState
 			case Turn.PLAYER:
 				{
 					
-					if (!player.Update())
+					if (!player.Update() && (GameStatus.Proceeded == true))
 					{
 						Lib.println("@>>> Player Turn");
 						turn = Turn.CPU;
