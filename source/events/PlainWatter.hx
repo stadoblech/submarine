@@ -10,8 +10,7 @@ class PlainWatter extends Event
 	public function new() 
 	{
 		super();
-	}
-		
+	}		
 	
 	
 	//Vrátí následovníka funkce.

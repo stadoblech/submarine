@@ -12,7 +12,8 @@ import neko.Lib;
 
 enum Turn
 {
-	CPU;
+	CPUFIRST;
+	CPUSECOND;
 	PLAYER;
 }
 
@@ -28,8 +29,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		turn = Turn.CPU;
-		player = new PlayerLogic();
+		turn = Turn.CPUFIRST;
 		cpu = new CPUlogic();
 		
 		board = new Board();
@@ -53,22 +53,32 @@ class PlayState extends FlxState
 		switch(turn)
 		{
 			case Turn.PLAYER:
-				{
+				{		
 					
-					if (!player.Update() && (GameStatus.Proceeded == true))
+					if (!player.Update())
 					{
 						Lib.println("@>>> Player Turn");
-						turn = Turn.CPU;
-						cpu.SetEnding();	//nastavení příznaku končení eventu
-					}
+						turn = Turn.CPUSECOND;
+					}					
 				}
-			case Turn.CPU:
+			case Turn.CPUFIRST:
 				{
 					
-					if (!cpu.Update())
+					if (!cpu.Update(1))
 					{
-						Lib.println("@>>> CPU Turn");
+						Lib.println("@>>> CPUFIRST Turn");
 						turn = Turn.PLAYER;
+						player = new PlayerLogic();
+					}
+					
+				}
+			case Turn.CPUSECOND:
+				{
+					
+					if (!cpu.Update(2))
+					{
+						Lib.println("@>>> CPUSECOND Turn");
+						turn = Turn.CPUFIRST;
 					}
 					
 				}

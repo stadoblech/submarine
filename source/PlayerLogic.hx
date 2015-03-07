@@ -1,6 +1,7 @@
 package ;
 import flixel.system.debug.Tracker;
 import flixel.util.FlxTimer;
+import gameboard.Board;
 import haxe.Timer;
 import neko.Lib;
 
@@ -12,28 +13,24 @@ class PlayerLogic
 {
 	private var _returnValue:Bool = true;
 	var timer:FlxTimer;
+	var MAXACTIONS:Int = 5;
 	
 	public function new() 
 	{
-		
+		timer = new FlxTimer(20.0, setReturnValue, 1);
+		GameStatus.RestartPlayerStats();
 	}
 	
 	public function Update():Bool
-	{
-		
-		
-				
-		
-		if (GameStatus.TotalActions >= 5) 
+	{		
+		if (GameStatus.TotalActions >= MAXACTIONS) 
 		{
+			Board.UpdateLimit(Std.string(Std.int(timer.timeLeft)) + "/" + Std.string(Std.int(timer.time)), MAXACTIONS);
 			return false;
 		}
 		
+		Board.UpdateLimit(Std.string(Std.int(timer.timeLeft)) + "/" + Std.string(Std.int(timer.time)), MAXACTIONS);
 		
-		
-		//var yourTimer:haxe.Timer = new haxe.Timer(15000); 
-		//yourTimer.run = function():Void { _returnValue = false; yourTimer.stop(); }
-		timer = new FlxTimer(5.0, setReturnValue, 1);
 		
 		return _returnValue;
 	}

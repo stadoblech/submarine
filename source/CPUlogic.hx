@@ -22,30 +22,67 @@ class CPUlogic
 	//Pokud nemá logika aktivní event, tak nějaký vybere. Nastaví podmínky eventu a nastaví si aktivní událost jako true.
 	//Pokud má logika aktivní event a event končí, tak vynuluje podmínky a reaguje na vstupy uživatele. Event se nenuluje,
 	//aby bylo možné případně na event navazovat.
-	public function Update():Bool
+	public function Update(role:Int):Bool
 	{
-		if (!haveActiveEvent)
+		
+		switch (role) 
 		{
-			Lib.println("@>>>> New Event Picked");
-			activeEvent = pickEvent();
-			GameStatus.RestartPlayerStats();
-			activeEvent.SetConditions();
-			Board.UpdateLabel();
-			haveActiveEvent = true;
-			return false;
-		}else
-		{		
-			if (activeEvent.isEventEnding())
-			{
-				Lib.println("@>>>> Second Event Part Launched");
-				activeEvent.UnsetConditions();
-				activeEvent.MakePlayerPay();
-				Board.UpdateLabel();
-				haveActiveEvent = false;
-				return false;
-			}
-		}
-		return true;		
+			case 1:
+				{
+					Lib.println("@>>>> First Event Part Launched");
+					if (!haveActiveEvent)
+					{
+						Lib.println("@>>>> New Event Picked");
+						GameStatus.Proceeded = false;			//čeká na proceed
+						activeEvent = pickEvent();				//vybere novu událost
+						GameStatus.RestartPlayerStats();		//vynuluje změny způsobené hráčem
+						activeEvent.SetConditions();			//nastaví změny prostředí
+						Board.UpdateLabel();					//vypíše text
+						haveActiveEvent = true;					//změní stav aktivní události na true
+						activeEvent.UnEndEvent();				//nastavit nekončení eventu
+						return true;							//skončí neúspěšně
+					}else 
+					{
+						if (GameStatus.Proceeded) 
+						{
+							Lib.println("@>>>> First Event Part Stopped");
+							return false;						//proceed, skončí úspěšně
+						}else 
+						{
+							return true;
+						}
+					}
+				}
+			case 2:
+				{		
+					
+					Lib.println("@>>>> Second Event Part Launched" + activeEvent.isEventEnding());
+					if (!activeEvent.isEventEnding()) 
+					{
+						Lib.println("@>>>> Second Event Part Processed");
+						GameStatus.Proceeded = false;				//čeká na proceed
+						activeEvent.UnsetConditions();				//zruší změny prostředí
+						activeEvent.MakePlayerPay();				//ovlivní hráče
+						Board.UpdateLabel();						//aktualizuje text
+						haveActiveEvent = false;					//zruší aktivní event
+						activeEvent.EndEvent();						//ukončí událost
+						return true;								//skončí neúspěšně		
+					}else 
+					{
+						if (GameStatus.Proceeded) 
+						{
+							Lib.println("@>>>> Second Event Part Stopped");
+							return false;						//proceed, skončí úspěšně
+						}else 
+						{
+							return true;
+						}
+					}
+				}
+			default:
+				return true;
+				
+		}		
 	}
 	
 	
@@ -81,9 +118,4 @@ class CPUlogic
 		return null;
 	}
 	
-	public function SetEnding():Void
-	{
-		Lib.println("@>>>>> Event Ended");
-		activeEvent.EndEvent();
-	}
 }

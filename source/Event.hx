@@ -32,6 +32,11 @@ class Event
 		ending = true;
 	}
 	
+	public function UnEndEvent()
+	{
+		ending = false;
+	}
+	
 	//Vrátí, zda má event nějakého následovníka nebo ne.
 	public function DoesContinue():Bool
 	{
