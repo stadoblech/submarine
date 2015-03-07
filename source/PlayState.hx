@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import gameboard.Board;
+import neko.Lib;
 
 
 enum Turn
@@ -34,6 +35,8 @@ class PlayState extends FlxState
 		board = new Board();
 		add(board);
 		
+		GameStatus.RestartProperties();
+		
 	}
 	
 	override public function destroy():Void
@@ -45,22 +48,26 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
-		
+		//Lib.println("@>> Submarine updated >>");
 		
 		switch(turn)
 		{
 			case Turn.PLAYER:
 				{
+					
 					if (!player.Update())
 					{
+						Lib.println("@>>> Player Turn");
 						turn = Turn.CPU;
 						cpu.SetEnding();	//nastavení příznaku končení eventu
 					}
 				}
 			case Turn.CPU:
 				{
+					
 					if (!cpu.Update())
 					{
+						Lib.println("@>>> CPU Turn");
 						turn = Turn.PLAYER;
 					}
 					

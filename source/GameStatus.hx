@@ -16,6 +16,10 @@ class GameStatus
 	//Staty způsobené hráčem
 	public static var Damage:Int;
 	public static var Move:Maneuvre; //předělat na pole pohybů!!!
+	public static var TotalActions:Int;
+	
+	//Systémové staty
+	public static var Proceeded:Bool;
 	
 	public static function RestartProperties():Void
 	{
@@ -23,9 +27,15 @@ class GameStatus
 		Energy = 100;
 		Label = "Welcome subexplorer. Find the way to salvation.... or die here, in waste depths of the Titan's Ocean.";
 		Terror = 0;
-		Oxygen = 240; //na deset dní
+		Oxygen = 240; //na deset dní		
 		
-		
+	}
+	
+	public static function RestartPlayerStats():Void
+	{
+		Damage = 0;
+		Move = null;
+		TotalActions = 0;
 	}
 	
 	public static function UpdateLayout():Void

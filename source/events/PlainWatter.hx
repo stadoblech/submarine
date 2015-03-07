@@ -12,23 +12,7 @@ class PlainWatter extends Event
 		super();
 	}
 		
-	//Vrátí, zda event končí nebo ne.
-	override public function isEventEnding():Bool
-	{
-		return ending;
-	}
 	
-	//Řekne eventu, že by měl skončit a hráč právě hrál své kolo.
-	override public function EndEvent()
-	{
-		ending = true;
-	}
-	
-	//Vrátí, zda má event nějakého následovníka nebo ne.
-	override public function DoesContinue():Bool
-	{
-		return continues;
-	}
 	
 	//Vrátí následovníka funkce.
 	override public function GetFollowingEvent():Event
@@ -60,10 +44,10 @@ class PlainWatter extends Event
 		{
 			case 0:
 				GameStatus.Label = "This emptyness is kinda creepy. Gods, what can be out there?";
-				GameStatus.Terror += 1;
+				GameStatus.Terror++;
 			case 1:
 				GameStatus.Label = "You don't see anything. Maybe it's good sign";
-				GameStatus.Terror -= 1;					
+				GameStatus.Terror--;					
 			default:			
 				
 		}

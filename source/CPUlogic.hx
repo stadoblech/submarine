@@ -1,6 +1,8 @@
 package ;
 import events.*;
 import flixel.util.FlxRandom;
+import gameboard.Board;
+import neko.Lib;
 
 /**
  * ...
@@ -24,16 +26,21 @@ class CPUlogic
 	{
 		if (!haveActiveEvent)
 		{
+			Lib.println("@>>>> New Event Picked");
 			activeEvent = pickEvent();
+			GameStatus.RestartPlayerStats();
 			activeEvent.SetConditions();
 			haveActiveEvent = true;
+			return false;
 		}else
 		{		
 			if (activeEvent.isEventEnding())
 			{
+				Lib.println("@>>>> Second Event Part Launched");
 				activeEvent.UnsetConditions();
 				activeEvent.MakePlayerPay();
 				haveActiveEvent = false;
+				return false;
 			}
 		}
 		return true;		
@@ -43,21 +50,27 @@ class CPUlogic
 	//Funkce pro výběr eventu.
 	private function pickEvent():Event
 	{
-		var rand = FlxRandom.intRanged(0, 4);
+		var rand = FlxRandom.intRanged(0, 0);
 		
 		//Má předchozí event pokračování? Pokud ano, pokračovat.
-		if (activeEvent.DoesContinue()) 
+		if (activeEvent != null) 
 		{
-			return activeEvent.GetFollowingEvent();
+			
+			if (activeEvent.DoesContinue()) 
+			{
+				Lib.println("@>>>>> Event Continued");
+				return activeEvent.GetFollowingEvent();
+			}
 		}
 		
 		
 		//Předchozí event nemá pokračování a je náhodně vybrána další událost.
 		switch (rand) 
 		{
+			
 			case 0:
-				return new PlainWatter();
-				
+				Lib.println("@>>>>> Random Event Picked");
+				return new PlainWatter();				
 			default:
 				return new PlainWatter();
 				
@@ -68,6 +81,7 @@ class CPUlogic
 	
 	public function SetEnding():Void
 	{
+		Lib.println("@>>>>> Event Ended");
 		activeEvent.EndEvent();
 	}
 }
