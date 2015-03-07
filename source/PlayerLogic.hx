@@ -3,7 +3,6 @@ import flixel.system.debug.Tracker;
 import flixel.util.FlxTimer;
 import gameboard.Board;
 import haxe.Timer;
-import neko.Lib;
 
 /**
  * ...

@@ -2,7 +2,6 @@ package ;
 import events.*;
 import flixel.util.FlxRandom;
 import gameboard.Board;
-import neko.Lib;
 
 /**
  * ...
@@ -23,16 +22,15 @@ class CPUlogic
 	//Pokud má logika aktivní event a event končí, tak vynuluje podmínky a reaguje na vstupy uživatele. Event se nenuluje,
 	//aby bylo možné případně na event navazovat.
 	public function Update(role:Int):Bool
-	{
-		
+	{		
 		switch (role) 
 		{
 			case 1:
 				{
-					Lib.println("@>>>> First Event Part Launched");
+					trace("@>>>> First Event Part Launched");
 					if (!haveActiveEvent)
 					{
-						Lib.println("@>>>> New Event Picked");
+						trace("@>>>> New Event Picked");
 						GameStatus.Proceeded = false;			//čeká na proceed
 						activeEvent = pickEvent();				//vybere novu událost
 						GameStatus.RestartPlayerStats();		//vynuluje změny způsobené hráčem
@@ -45,7 +43,7 @@ class CPUlogic
 					{
 						if (GameStatus.Proceeded) 
 						{
-							Lib.println("@>>>> First Event Part Stopped");
+							trace("@>>>> First Event Part Stopped");
 							return false;						//proceed, skončí úspěšně
 						}else 
 						{
@@ -56,10 +54,10 @@ class CPUlogic
 			case 2:
 				{		
 					
-					Lib.println("@>>>> Second Event Part Launched" + activeEvent.isEventEnding());
+					trace("@>>>> Second Event Part Launched" + activeEvent.isEventEnding());
 					if (!activeEvent.isEventEnding()) 
 					{
-						Lib.println("@>>>> Second Event Part Processed");
+						trace("@>>>> Second Event Part Processed");
 						GameStatus.Proceeded = false;				//čeká na proceed
 						GameStatus.Oxygen--;						//ubere jeden kyslík
 						activeEvent.UnsetConditions();				//zruší změny prostředí
@@ -72,7 +70,7 @@ class CPUlogic
 					{
 						if (GameStatus.Proceeded) 
 						{
-							Lib.println("@>>>> Second Event Part Stopped");
+							trace("@>>>> Second Event Part Stopped");
 							return false;						//proceed, skončí úspěšně
 						}else 
 						{
@@ -98,8 +96,12 @@ class CPUlogic
 			
 			if (activeEvent.DoesContinue()) 
 			{
-				Lib.println("@>>>>> Event Continued");
-				return activeEvent.GetFollowingEvent();
+				trace("@>>>>> Event Continued");
+				var returnValue:Event = activeEvent.GetFollowingEvent();
+				if (returnValue != null) 
+				{
+					return returnValue;
+				}
 			}
 		}
 		

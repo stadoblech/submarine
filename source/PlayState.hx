@@ -7,7 +7,6 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import gameboard.Board;
-import neko.Lib;
 
 
 enum Turn
@@ -57,7 +56,7 @@ class PlayState extends FlxState
 					
 					if (!player.Update())
 					{
-						Lib.println("@>>> Player Turn");
+						trace("@>>> Player Turn");
 						turn = Turn.CPUSECOND;
 					}					
 				}
@@ -66,7 +65,7 @@ class PlayState extends FlxState
 					
 					if (!cpu.Update(1))
 					{
-						Lib.println("@>>> CPUFIRST Turn");
+						trace("@>>> CPUFIRST Turn");
 						turn = Turn.PLAYER;
 						player = new PlayerLogic();
 					}
@@ -77,7 +76,7 @@ class PlayState extends FlxState
 					
 					if (!cpu.Update(2))
 					{
-						Lib.println("@>>> CPUSECOND Turn");
+						trace("@>>> CPUSECOND Turn");
 						turn = Turn.CPUFIRST;
 					}
 					

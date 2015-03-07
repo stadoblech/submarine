@@ -3,7 +3,6 @@ import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.text.FlxTextField;
 import flixel.ui.FlxButton;
-import neko.Lib;
 import openfl.text.TextField;
 import flixel.util.FlxRandom;
 
