@@ -8,6 +8,7 @@ class GameStatus
 {
 	
 	public static var Label:String;
+	public static var SubmarineView:View;
 	
 	//Staty hráče
 	public static var Health:Int;
@@ -16,10 +17,11 @@ class GameStatus
 	public static var Oxygen:Int; //v hodinách
 	public static var Inventory:Array<String>;
 	public static var Ammunition:Int;
+	public static var Speed:Int;
 	
 	//Staty způsobené hráčem
 	public static var Damage:Int;
-	public static var Move:Array<Maneuvre>; //předělat na pole pohybů!!!
+	public static var Move:Array<Maneuvre>;
 	public static var TotalActions:Int;
 	
 	//Systémové staty
@@ -36,6 +38,7 @@ class GameStatus
 		Oxygen = 240; //na deset dní		
 		Inventory = new Array<String>();
 		Ammunition = 100;
+		Speed = 3;
 		
 	}
 	
@@ -52,17 +55,5 @@ class GameStatus
 		
 	}
 	
-	
-}
-
-enum Maneuvre
-{
-	Up;
-	Down;
-	Left;
-	Right;
-	Forward;
-	Backward;
-	Stop;
 	
 }

@@ -61,6 +61,7 @@ class CPUlogic
 					{
 						Lib.println("@>>>> Second Event Part Processed");
 						GameStatus.Proceeded = false;				//čeká na proceed
+						GameStatus.Oxygen--;						//ubere jeden kyslík
 						activeEvent.UnsetConditions();				//zruší změny prostředí
 						activeEvent.MakePlayerPay();				//ovlivní hráče
 						Board.UpdateLabel();						//aktualizuje text
@@ -89,7 +90,7 @@ class CPUlogic
 	//Funkce pro výběr eventu.
 	private function pickEvent():Event
 	{
-		var rand = FlxRandom.intRanged(0, 0);
+		var rand = FlxRandom.intRanged(0, 1);
 		
 		//Má předchozí event pokračování? Pokud ano, pokračovat.
 		if (activeEvent != null) 
@@ -108,8 +109,9 @@ class CPUlogic
 		{
 			
 			case 0:
-				Lib.println("@>>>>> Random Event Picked");
-				return new PlainWatter();				
+				return new PlainWatter();	
+			case 1:
+				return new Seaweed1();
 			default:
 				return new PlainWatter();
 				
