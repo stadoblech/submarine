@@ -111,7 +111,7 @@ class CPUlogic
 			case 0:
 				return new PlainWatter();	
 			case 1:
-				return new Seaweed1();
+				return new Seaweed4();
 			default:
 				return new PlainWatter();
 				

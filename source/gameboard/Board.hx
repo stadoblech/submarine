@@ -5,6 +5,7 @@ import flixel.text.FlxTextField;
 import flixel.ui.FlxButton;
 import neko.Lib;
 import openfl.text.TextField;
+import flixel.util.FlxRandom;
 
 /**
  * ...
@@ -13,8 +14,12 @@ import openfl.text.TextField;
 class Board extends FlxSpriteGroup
 {
 	var attackButton:FlxButton;
-	var moveButton:FlxButton;
 	var proceedButton:FlxButton;
+	var moveUpButton:FlxButton;
+	var moveDownButton:FlxButton;
+	var moveLeftButton:FlxButton;
+	var moveRightButton:FlxButton;
+	
 	static var labelBox:FlxText;
 	static var limitBox:FlxTextField;
 	var limitBoxLabel:FlxTextField;
@@ -44,11 +49,17 @@ class Board extends FlxSpriteGroup
 		attackButton = new FlxButton(100, 100, "Attack", proceedAttack);
 		add(attackButton);
 		
-		moveButton = new FlxButton(100, 200, "Move", proceedMove);
-		add(moveButton);
-		
 		proceedButton = new FlxButton(100, 150, "Proceed", proceedProceed);
 		add(proceedButton);
+		
+		moveUpButton = new FlxButton(100, 200, "Up", moveUp);
+		add(moveUpButton);
+		moveDownButton = new FlxButton(100, 250, "Down", moveDown);
+		add(moveDownButton);
+		moveLeftButton = new FlxButton(50, 225, "Left", moveLeft);
+		add(moveLeftButton);
+		moveRightButton = new FlxButton(150, 225, "Right", moveRight);
+		add(moveRightButton);
 		
 		labelBox = new FlxText(200, 100, 300, "error", 8, true);
 		add(labelBox);
@@ -99,13 +110,42 @@ class Board extends FlxSpriteGroup
 	
 	private function proceedAttack():Void
 	{
-		GameStatus.TotalActions++;
+		
+		if ((GameStatus.Ammunition > 0) && (GameStatus.TotalActions < 5)) 
+		{
+			GameStatus.TotalActions++;
+			GameStatus.Damage += FlxRandom.intRanged(1,5);
+			GameStatus.Ammunition--;
+			trace("Damage: " + GameStatus.Damage);
+		}
+		else 
+		{
+			
+		}
 	}
 	
-	private function proceedMove():Void
+	private function moveUp()
 	{
 		GameStatus.TotalActions++;
+		GameStatus.Move.push(Maneuvre.Up);
 	}
+	private function moveDown()
+	{
+		GameStatus.TotalActions++;
+		GameStatus.Move.push(Maneuvre.Down);
+	}
+	private function moveLeft()
+	{
+		GameStatus.TotalActions++;
+		GameStatus.Move.push(Maneuvre.Left);
+	}
+	private function moveRight()
+	{
+		GameStatus.TotalActions++;
+		GameStatus.Move.push(Maneuvre.Right);
+	}
+	
+
 	
 	public function setLabel():Void
 	{
@@ -126,6 +166,24 @@ class Board extends FlxSpriteGroup
 	override public function update():Void 
 	{
 		super.update();
+		
+		if (GameStatus.Health < 0) 
+		{
+			GameStatus.Health = 0;
+		}
+		if (GameStatus.Energy < 0) 
+		{
+			GameStatus.Energy = 0;
+		}
+		if (GameStatus.Terror < 0) 
+		{
+			GameStatus.Terror = 0;
+		}
+		if (GameStatus.Oxygen < 0) 
+		{
+			GameStatus.Oxygen = 0;
+		}
+		
 		
 		healthValue.text = Std.string(GameStatus.Health);
 		energyValue.text = Std.string(GameStatus.Energy);
