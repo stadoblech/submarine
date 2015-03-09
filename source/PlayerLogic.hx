@@ -22,13 +22,12 @@ class PlayerLogic
 	
 	public function Update():Bool
 	{		
+				Board.UpdateLimit(Std.string(Std.int(timer.timeLeft)) + "/" + Std.string(Std.int(timer.time)), MAXACTIONS);
 		if (GameStatus.TotalActions >= MAXACTIONS) 
 		{
-			Board.UpdateLimit(Std.string(Std.int(timer.timeLeft)) + "/" + Std.string(Std.int(timer.time)), MAXACTIONS);
 			return false;
 		}
 		
-		Board.UpdateLimit(Std.string(Std.int(timer.timeLeft)) + "/" + Std.string(Std.int(timer.time)), MAXACTIONS);
 		
 		
 		return _returnValue;

@@ -40,6 +40,7 @@ class GameStatus
 		Ammunition = 100;
 		Speed = 3;
 		
+		RestartPlayerStats();
 	}
 	
 	public static function RestartPlayerStats():Void
@@ -47,12 +48,6 @@ class GameStatus
 		Damage = 0;
 		Move = new Array<Maneuvre>();
 		TotalActions = 0;
-	}
-	
-	public static function UpdateLayout():Void
-	{
-		
-		
 	}
 	
 	
