@@ -1,5 +1,6 @@
 package ;
 import events.*;
+import events.marvellousCave.MarvellousCave1;
 import flixel.util.FlxRandom;
 import gameboard.Board;
 
@@ -88,7 +89,7 @@ class CPUlogic
 	//Funkce pro výběr eventu.
 	private function pickEvent():Event
 	{
-		var rand = FlxRandom.intRanged(0, 1);
+		var rand = FlxRandom.intRanged(2, 2);
 		
 		//Má předchozí event pokračování? Pokud ano, pokračovat.
 		if (activeEvent != null) 
@@ -114,6 +115,8 @@ class CPUlogic
 				return new PlainWatter();	
 			case 1:
 				return new Seaweed1();
+			case 2:
+				return new MarvellousCave1();
 			default:
 				return new PlainWatter();
 				
